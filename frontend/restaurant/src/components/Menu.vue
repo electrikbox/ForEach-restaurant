@@ -2,16 +2,16 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 
-const router = useRouter();
 const isHovered = ref(false);
+let isAdmin;
 
 const userString = localStorage.getItem("user");
-if (!userString) router.push('/login');
 
-const user = JSON.parse(userString);
-const isAdmin = user.role == 'admin';
+if (userString) {
+	const user = JSON.parse(userString);
+	isAdmin = user.role == 'admin';
+}
 </script>
 
 

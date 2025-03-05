@@ -4,7 +4,7 @@ const sendEmail = require('./sendEmail');
 
 
 
-// Send an email to users  24 hours before their reservations
+// Send an email to users 24 hours before their reservations
 // ============================================================================
 
 const schedule = "0 0 * * * *"; // every hour

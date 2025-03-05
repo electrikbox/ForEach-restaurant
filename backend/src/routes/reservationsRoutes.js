@@ -4,7 +4,7 @@ const adminCheck = require('../middleware/adminCheck');
 
 reservationsRouter.post('/', reservationsController.createReservation);
 reservationsRouter.get('/:id', reservationsController.getReservation);
-reservationsRouter.get('/user/:userId', adminCheck, reservationsController.getReservationsByUser);
+reservationsRouter.get('/user/:userId', reservationsController.getReservationsByUser);
 reservationsRouter.put('/:id', adminCheck, reservationsController.updateReservation);
 reservationsRouter.delete('/:id', adminCheck, reservationsController.deleteReservation);
 
