@@ -2,9 +2,9 @@
 
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import { useRouter } from 'vue-router';
+import { authApi } from '@/api/requests';
 
 
 const email = ref('');
@@ -19,13 +19,12 @@ const login = async () => {
 	errorMessage.value = ''; // Réinitialise le message d'erreur
 	console.log(email, "connecting...");
 	try {
-		const response = await axios.post('http://localhost:8000/auth/login',
-		{ email: email.value, password: password.value },
-		{ withCredentials: true });
+		const response = await authApi.login(email.value, password.value);
 
 		localStorage.setItem('user', JSON.stringify(response.data));
+
 		toast.success(`Welcome, ${response.data.username} !`);
-		router.push('/add-reservation');
+		router.push('/user');
 	} catch (error) {
 		errorMessage.value = 'Login failed. Please check your credentials.';
 		console.error(error);
