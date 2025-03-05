@@ -21,7 +21,7 @@ const fetchReservations = async () => {
 		);
 
 		reservations.value = response.data.map((appt) => ({
-			title: appt.description,
+			title: "Le Gourmet Moderne",
 			start: new Date(appt.dateDebut),
 			end: new Date(appt.dateFin)
 		}));
@@ -53,7 +53,7 @@ onMounted(fetchReservations);
 <template>
 <div class="min-h-screen flex items-center justify-center w-full">
 
-	<div class="container mt-5">
+	<div class="container mt-5 bg-gray-700 p-5 rounded-lg shadow-lg">
 		<h2>Calendrier des rendez-vous</h2>
 		<vue-cal class="vuecal--blue-theme"
 		locale="fr"
@@ -61,6 +61,9 @@ onMounted(fetchReservations);
 		:disable-views="['years', 'year']"
 		@event-click="showEventDetails"
 		:time="true"
+		:time-from="12 * 60"
+  		:time-to="23 * 60"
+  		:time-step="30"
 		/>
 			
 		<!-- Modal pour afficher les détails -->

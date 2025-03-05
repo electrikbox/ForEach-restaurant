@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzgyMDRhMjMyZjBkMDcyOTY3YWVlNiIsInVzZXJuYW1lIjoib2xpdmUyIiwiZW1haWwiOiJvbGl2ZTJAb2xpdmUyLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQxMTY5MDMwLCJleHAiOjE3NDExNzI2MzB9.YYqrlgOSk823nE9RtNc1B9VBbBM9E6c4-_T5eZVS8K0
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzgxNWE3MjEwMzYwMzZlOWJkNjVlNiIsInVzZXJuYW1lIjoib2xpdmUiLCJlbWFpbCI6Im9saXZlQG9saXZlLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQxMTc4MDAxLCJleHAiOjE3NDExODE2MDF9.WzXMobm954bLugdsv5beVEIopPENvMlLWLiM_r_jIk0
 
 
 # AUTHENTICATION
@@ -19,7 +19,7 @@ POST http://localhost:8000/auth/login HTTP/1.1
 content-type: application/json
 
 {
-    "email": "olive2@olive2.com",
+    "email": "olive@olive.com",
     "password": "password123!"
 }
 
