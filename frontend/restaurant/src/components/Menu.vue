@@ -11,7 +11,7 @@ const userString = localStorage.getItem("user");
 if (!userString) router.push('/login');
 
 const user = JSON.parse(userString);
-const isAdmin = user.role;
+const isAdmin = user.role == 'admin';
 </script>
 
 
