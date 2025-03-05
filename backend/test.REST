@@ -1,0 +1,74 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzgyMDRhMjMyZjBkMDcyOTY3YWVlNiIsInVzZXJuYW1lIjoib2xpdmUyIiwiZW1haWwiOiJvbGl2ZTJAb2xpdmUyLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQxMTY5MDMwLCJleHAiOjE3NDExNzI2MzB9.YYqrlgOSk823nE9RtNc1B9VBbBM9E6c4-_T5eZVS8K0
+
+
+# AUTHENTICATION
+# =============================================================================
+
+POST http://localhost:8000/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "olive10",
+    "email": "olive10@olive10.com",
+    "password": "password123!"
+}
+
+###
+
+POST http://localhost:8000/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "olive2@olive2.com",
+    "password": "password123!"
+}
+
+###
+
+
+
+
+# RESERVATIONS
+# =============================================================================
+
+POST http://localhost:8000/reservations HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+    "user": "67c820b3232f0d072967aef7",
+    "dateDebut": "2025-03-13",
+    "dateFin": "2025-03-13"
+}
+
+###
+
+GET http://localhost:8000/reservations/67c8181ed39b02d90873a37b HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+###
+
+GET http://localhost:8000/reservations/user/67c815a721036036e9bd65e6 HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+###
+
+PUT http://localhost:8000/reservations/67c8181ed39b02d90873a37b HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+    "user": "67c583c38a83ab979a8d2313",
+    "dateDebut": "2021-12-12",
+    "dateFin": "2021-12-12",
+    "validated": true,
+    "sentEmail": false
+}
+
+###
+
+DELETE http://localhost:8000/reservations/67c8181ed39b02d90873a37b HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
