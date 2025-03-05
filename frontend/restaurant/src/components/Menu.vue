@@ -25,19 +25,13 @@ if (userString) {
 >
 	<ul>
 		<li>
-			<router-link to="add-reservation">
+			<router-link to="user">
 				<font-awesome-icon :icon="['fas', 'calendar-plus']" />
-				<span class="menu-text">Reserver</span>
-			</router-link>
-		</li>
-		<li>
-			<router-link to="reservation-list">
-				<font-awesome-icon :icon="['fas', 'calendar-check']" />
-				<span class="menu-text">Vos réservations</span>
+				<span class="menu-text">Reservations</span>
 			</router-link>
 		</li>
 		<li v-if="isAdmin">
-			<router-link to="admin/dashboard">
+			<router-link to="admin">
 				<font-awesome-icon :icon="['fas', 'user']" />
 				<span class="menu-text">Admin</span>
 			</router-link>
