@@ -14,36 +14,34 @@ class ReservationsService {
         const maxReservations = parseInt(process.env.MAX_RESERVATIONS, 10);
         const newDateDebut = new Date(dateDebut);
         const newDateFin = new Date(dateFin);
-    
+
         // Compter uniquement les réservations qui se chevauchent avec le créneau demandé
         const overlappingCount = await Reservations.countDocuments({
             dateDebut: { $lte: newDateFin },
             dateFin: { $gte: newDateDebut }
         });
-        
+
         if (overlappingCount >= maxReservations)
             throw new AppError(400, "Il n'y a plus de place pour des réservations à cet horaire.");
         else
             console.log('Nombre de réservations:', overlappingCount);
-    
+
         const existingReservation = await Reservations.findOne({
             user,
             dateDebut: { $lte: newDateFin },
             dateFin: { $gte: newDateDebut }
         });
-        
+
         if (existingReservation) {
             throw new AppError(400, 'Une réservation existe déjà pour cet intervalle de temps.');
         }
-        
+
         const newReservation = new Reservations({ user, dateDebut, dateFin });
         await newReservation.save();
-        
+
         return newReservation;
     };
-    
-      
-    
+
 
 
     // login method

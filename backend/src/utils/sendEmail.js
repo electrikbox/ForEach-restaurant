@@ -14,10 +14,10 @@ const password = process.env.EMAIL_PASSWORD;
 // ============================================================================
 
 const transporter = nodemailer.createTransport({
-  host: host,
-  port: 587,
-  secure: false,
-  auth: { user: emailUser, pass: password },
+	host: host,
+	port: 587,
+	secure: false,
+	auth: { user: emailUser, pass: password },
 });
 
 
@@ -26,14 +26,14 @@ const transporter = nodemailer.createTransport({
 // ============================================================================
 
 const sendEmail = async (to, subject, htmlContent) => {
-  await transporter.sendMail({
-    from: `"App RDV" <${emailUser}>`,
-    to,
-    subject,
-    html: htmlContent,
-  });
+	await transporter.sendMail({
+		from: `"App RDV" <${emailUser}>`,
+		to,
+		subject,
+		html: htmlContent,
+	});
 
-  console.debug(`email sent to ${email}`);
+	console.debug(`email sent to ${email}`);
 };
 
 module.exports = sendEmail;
