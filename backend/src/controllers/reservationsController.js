@@ -62,9 +62,11 @@ class ReservationsController {
     static updateReservation = async (req, res) => {
         try {
             const { id } = req.params;
-            const { user, date, validated, sentEmail } = req.body;
-            const response = await ReservationsService.updateReservation(id, user, date, validated, sentEmail);
+            const { user, dateDebut, dateFin, validated, sentEmail } = req.body;
+            const response = await ReservationsService.updateReservation(id, user, dateDebut, dateFin, validated, sentEmail);
             res.status(200).json(response);
+
+            console.log('Reservation updated:', response);
 
         } catch (error) {
             const statusCode = error.statusCode || 400;

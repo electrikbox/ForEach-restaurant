@@ -48,10 +48,10 @@ class ReservationsService {
     // =================================================================
 
     static getReservation = async (id) => {
-        const reseration = await Reservations.findOne({ _id: id });
-        if (!reseration) throw new AppError(404, 'Reseration not found');
+        const reservation = await Reservations.findOne({ _id: id });
+        if (!reservation) throw new AppError(404, 'Reseration not found');
         
-        return reseration;
+        return reservation;
     };
 
 
@@ -71,19 +71,24 @@ class ReservationsService {
     // update method
     // =================================================================
 
-    static updateReservation = async (id, user, date, valideted, sentEmail) => {
-        const reseration = await Reservations.findOne({ _id: id });
-        if (!reseration) throw new AppError(404, 'Reseration not found');
+    static updateReservation = async (id, user, dateDebut, dateFin, validated, sentEmail) => {
+        // Construire un objet de mise à jour uniquement avec les champs définis (non undefined)
+        const update = {};
+        if (user !== undefined) update.user = user;
+        if (dateDebut !== undefined) update.dateDebut = dateDebut;
+        if (dateFin !== undefined) update.dateFin = dateFin;
+        if (validated !== undefined) update.validated = validated;
+        if (sentEmail !== undefined) update.sentEmail = sentEmail;
 
-        reseration.user = user;
-        reseration.date = date;
-        reseration.validated = valideted;
-        reseration.sentEmail = sentEmail;
+        const reservation = await Reservations.findOneAndUpdate(
+            { _id: id },
+            { $set: update },
+            { new: true, runValidators: true }
+        );
 
-        const response = await reseration.save();
-        if (!response) throw new AppError(500, 'Error updating reseration');
+        if (!reservation) throw new AppError(404, 'Reservation not found');
 
-        return response;
+        return reservation;
     };
 
 
@@ -91,11 +96,8 @@ class ReservationsService {
     // =================================================================
 
     static deleteReservation = async (id) => {
-        const reseration = await Reservations.findOne({ _id: id });
-        if (!reseration) throw new AppError(404, 'Reseration not found');
-
-        const response = await reseration.delete();
-        if (!response) throw new AppError(500, 'Error deleting reseration');
+        const response = await Reservations.deleteOne({ _id: id });
+        if (!response) throw new AppError(500, 'Error deleting reservation');
 
         return response;
     };
