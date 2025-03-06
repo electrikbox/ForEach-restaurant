@@ -28,15 +28,6 @@ const fetchReservations = async () => {
 		}));
 
 	} catch (error) {
-		// let errMsg;
-
-		// if (error.response && error.response.data && error.response.data.message)
-		// 	errMsg = error.response.data.message;
-		// else
-		// 	errMsg = error.message;
-
-		// console.error("Erreur lors de la récupération des rendez-vous:", errMsg);
-
 		errorHandler(error, "Erreur lors de la récupération des rendez-vous");
 	}
 };
