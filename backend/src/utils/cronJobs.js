@@ -10,6 +10,8 @@ const sendEmail = require('./sendEmail');
 const schedule = "0 0 * * * *"; // every hour
 
 cron.schedule(schedule, async () => {
+
+	// Get current date and date in 24 hours
 	const now = new Date();
 	const futurDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 
@@ -18,6 +20,7 @@ cron.schedule(schedule, async () => {
 			dateDebut: { $gt: now, $lt: futurDate}
 		}).populate('user');
 
+		// Send email to each user
 		for (const reservation of reservations) {
 			console.log('Reservation:', reservation);
 

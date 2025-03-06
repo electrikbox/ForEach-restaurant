@@ -46,8 +46,19 @@ class ReservationsService {
         // Créer et sauvegarder la nouvelle réservation en incluant le nombre de personnes
         const newReservation = new Reservations({ user, dateDebut, dateFin, nbPersonnes });
         await newReservation.save();
+
+        // Envoi d'un email de confirmation
+        await newReservation.populate('user');
+
+        const subject = 'Confirmation reservation';
+        const htmlContent = `
+            <p>Bonjour ${newReservation.user.username}</p>
+            <p>Votre reservation pour ${newReservation.nbPersonnes} personne(s) est confirmée: ${newReservation.dateDebut}</p>`
+        ;
+        await sendEmail(newReservation.user.email, subject, htmlContent);
+
         return newReservation;
-    };      
+    };
 
 
 
@@ -100,24 +111,29 @@ class ReservationsService {
         if (sentEmail !== undefined) update.sentEmail = sentEmail;
         if (nbPersonnes !== undefined) update.nbPersonnes = nbPersonnes;
 
+        // Vérifier si la nouvelle réservation chevauche une réservation existante
         const existingReservation = await Reservations.findOne({
             user,
             dateDebut: { $lte: dateFin },
             dateFin: { $gte: dateDebut }
         });
 
+        // Si une réservation existe déjà pour cet intervalle, rejeter la mise à jour
         if (existingReservation && existingReservation._id.toString() !== id) {
             throw new AppError(400, 'Une réservation existe déjà pour cet intervalle de temps.');
         }
 
+        // Mettre à jour la réservation
         const reservation = await Reservations.findOneAndUpdate(
             { _id: id },
             { $set: update },
             { new: true, runValidators: true }
         ).populate('user');
 
+        // Si la réservation n'existe pas, renvoyer une erreur
         if (!reservation) throw new AppError(404, 'Reservation not found');
 
+        // Envoi d'un email de modification
         const subject = 'Modification reservation';
         const htmlContent = `
             <p>Bonjour ${reservation.user.username}</p>
