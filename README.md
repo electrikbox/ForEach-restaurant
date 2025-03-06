@@ -29,3 +29,6 @@ EMAIL_PASSWORD=<email user password>
 
 MAX_RESERVATIONS=10
 ```
+
+## admin register
+Register un utilisateur normal puis changer son role en "admin" dans la base de donnée directement (en attendant de le créer autrement)
