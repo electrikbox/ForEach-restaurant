@@ -151,4 +151,8 @@ onMounted(fetchReservations);
   background-color: #4caf50;
 }
 
+::v-deep .vuecal__event:hover {
+  	cursor: grab;
+}
+
 </style>
