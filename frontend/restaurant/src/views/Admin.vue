@@ -28,15 +28,7 @@ const fetchReservations = async () => {
 		}));
 
 	} catch (error) {
-		let errMsg;
-
-		if (error.response && error.response.data && error.response.data.message)
-			errMsg = error.response.data.message;
-		else
-			errMsg = error.message;
-
-		console.error("Erreur lors de la récupération des rendez-vous:", errMsg);
-  		await fetchReservations();
+		errorHandler(error, "Erreur lors de la récupération des rendez-vous");
 	}
 };
 
@@ -120,6 +112,10 @@ onMounted(fetchReservations);
   	color: #fff;
 }
 
+::v-deep .vuecal__event:hover {
+	  cursor: grab;
+}
+
 ::v-deep .vuecal__event.user-color-0 {
   background-color: #f44336;
 }
@@ -150,9 +146,4 @@ onMounted(fetchReservations);
 ::v-deep .vuecal__event.user-color-9 {
   background-color: #4caf50;
 }
-
-::v-deep .vuecal__event:hover {
-  	cursor: grab;
-}
-
 </style>
