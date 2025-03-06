@@ -80,6 +80,16 @@ class ReservationsService {
         if (validated !== undefined) update.validated = validated;
         if (sentEmail !== undefined) update.sentEmail = sentEmail;
 
+        const existingReservation = await Reservations.findOne({
+            user,
+            dateDebut: { $lte: dateFin },
+            dateFin: { $gte: dateDebut }
+        });
+
+        if (existingReservation && existingReservation._id.toString() !== id) {
+            throw new AppError(400, 'Une réservation existe déjà pour cet intervalle de temps.');
+        }
+
         const reservation = await Reservations.findOneAndUpdate(
             { _id: id },
             { $set: update },
