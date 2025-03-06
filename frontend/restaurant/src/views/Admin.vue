@@ -91,7 +91,7 @@ onMounted(fetchReservations);
 
 <template>
 <div class="flex items-start justify-center w-full gap-5">
-	<div class="container mt-5 bg-gray-100 p-5 rounded-lg shadow-lg w-512">
+	<div class="container mt-10 bg-gray-100 p-5 rounded-lg shadow-lg w-512">
 
 	<vue-cal class="vuecal--blue-theme"
 		locale="fr"

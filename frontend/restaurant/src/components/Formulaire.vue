@@ -64,61 +64,66 @@ const submitForm = async () => {
 </script>
 
 <template>
-	<div class="pb-4 rounded mx-auto">
-		<form @submit.prevent="submitForm">
-			<div class="flex flex-wrap gap-4">
+<div class="pb-4 rounded mx-auto">
 
-				<!-- Champ Date -->
-				<div class="flex-1">
-					<label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-					<input 
-						type="date" 
-						id="date" 
-						v-model="selectedDate" 
-						:min="minDate" 
-						class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
-						required
-					/>
-				</div>
+	<h3 class="text-3xl font-bold">Réservez</h3>
+	<hr class="mb-5 h-0.5 border-t-0 bg-cyan-700" />
 
-				<!-- Champ Heure -->
-				<div class="flex-1">
-					<label for="time" class="block text-sm font-medium text-gray-700">Heure</label>
-					<select 
-						id="time" 
-						v-model="selectedTime" 
-						class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
-						required
-					>
-						<option disabled value="">Veuillez sélectionner une heure</option>
-						<option v-for="time in allSlots" :key="time" :value="time">
-							{{ time }}
-						</option>
-					</select>
-				</div>
+	<form @submit.prevent="submitForm">
+		<div class="flex flex-wrap gap-4">
 
-				<!-- Nombre de personnes -->
-				<div class="flex-1">
-					<label for="nbPeople" class="block text-sm font-medium text-gray-700">Nombre de personnes</label>
-					<input 
-						type="number" 
-						id="nbPeople" 
-						v-model.number="nbPeople" 
-						min="1"
-						max="10"
-						class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
-						required
-					/>
-				</div>
+			<!-- Champ Date -->
+			<div class="flex-1">
+				<label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+				<input 
+					type="date" 
+					id="date" 
+					v-model="selectedDate" 
+					:min="minDate" 
+					class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+					required
+				/>
+			</div>
+
+			<!-- Champ Heure -->
+			<div class="flex-1">
+				<label for="time" class="block text-sm font-medium text-gray-700">Heure</label>
+				<select 
+					id="time" 
+					v-model="selectedTime" 
+					class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+					required
+				>
+					<option disabled value="">Veuillez sélectionner une heure</option>
+					<option v-for="time in allSlots" :key="time" :value="time">
+						{{ time }}
+					</option>
+				</select>
+			</div>
+
+			<!-- Nombre de personnes -->
+			<div class="flex-2">
+				<label for="nbPeople" class="block text-sm font-medium text-gray-700">Nombre de personnes</label>
+				<input 
+					type="number" 
+					id="nbPeople" 
+					v-model.number="nbPeople" 
+					min="1"
+					max="10"
+					class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+					required
+				/>
 			</div>
 
 			<!-- Bouton de soumission -->
 			<button 
 				type="submit" 
-				class="w-full bg-amber-400 text-white py-2 px-4 mt-6 rounded hover:bg-amber-300"
+				class="flex-2 bg-cyan-700 text-white py-2 px-4 mt-6 rounded hover:bg-cyan-600"
 			>
 				Réserver
 			</button>
-		</form>
-	</div>
+		</div>
+
+	</form>
+</div>
 </template>

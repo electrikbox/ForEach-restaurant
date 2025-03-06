@@ -29,7 +29,7 @@ const register = async () => {
 
 <template>
 <div class="min-h-screen flex items-center justify-center w-full">
-	<div class="px-8 py-6 w-full max-w-md sm:w-3/4 md:w-1/2 lg:w-1/3">
+	<div class="p-6 w-full max-w-md sm:w-3/4 md:w-1/2 lg:w-1/3 bg-gray-700 rounded-lg shadow-md">
 		<h1 class="text-2xl font-bold text-center mb-4 dark:text-gray-200">Create account!</h1>
 		
 		<form @submit.prevent="register">
@@ -53,10 +53,10 @@ const register = async () => {
 			</div>
 
 			<div class="flex items-center justify-between mb-4">
-				<a href="/login" class="text-xs text-amber-400 hover:text-amber-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">Login</a>
+				<a href="/login" class="text-xs text-cyan-500 hover:text-cyan-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">Login</a>
 			</div>
 
-			<button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-500 hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+			<button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cyan-700 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 				Register
 			</button>
 		</form>

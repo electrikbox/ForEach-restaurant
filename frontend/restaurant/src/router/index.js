@@ -11,6 +11,7 @@ const toast = useToast();
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
+		{ path: '/', component: Login },
 		{ path: '/register', component: Register },
 		{ path: '/login', component: Login },
 		{ path: '/logout', component: Logout },

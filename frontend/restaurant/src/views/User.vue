@@ -67,10 +67,13 @@ onMounted(fetchReservations);
 
 
 <template>
-	<div class="flex items-start justify-center w-full gap-5">
+<div class="flex items-start justify-center w-full gap-5">
 
-		<div class="container mt-5 bg-gray-100 p-5 rounded-lg shadow-lg w-512">
+	<div class="container mt-10 bg-gray-100 p-5 rounded-lg shadow-lg w-512">
 		<Formulaire @reservation-created="fetchReservations" />
+
+		<h3 class="text-3xl font-bold pt-2">Vos réservations</h3>
+		<hr class="mb-5 h-0.5 border-t-0 bg-cyan-700" />
 
 		<vue-cal class="vuecal--blue-theme"
 			locale="fr"
@@ -79,10 +82,10 @@ onMounted(fetchReservations);
 			:disable-views="['years', 'year']"
 			:time="true"
 			:time-from="12 * 60"
-	  		:time-to="23 * 60"
-	  		:time-step="30"
+			:time-to="23 * 60"
+			:time-step="30"
 			:editable-events="{ title: false, drag: false, resize: false, delete: true, create: false }"
-	  		:drag-to-create-threshold="0"	
+			:drag-to-create-threshold="0"	
 			:snap-to-time="30"
 			@event-delete="deleteEvent"
 		/>

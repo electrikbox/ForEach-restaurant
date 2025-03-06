@@ -13,7 +13,7 @@ import Menu from './components/Menu.vue';
 
 const route = useRoute();
 // Le menu ne s'affichera pas sur "/login" et "/register"
-const showMenu = computed(() => !['/login', '/register'].includes(route.path));
+const showMenu = computed(() => !['/', '/login', '/register'].includes(route.path));
 </script>
 
 <template>
