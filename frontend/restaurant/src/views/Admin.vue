@@ -18,8 +18,6 @@ const fetchReservations = async () => {
 	try {
 		const response = await reservationsApi.getAllReservations();
 
-		console.log(response.data);
-
 		reservations.value = response.data.map((res) => ({
 			title: `${res.user.username}: ${res.nbPersonnes} personnes`,
 			start: new Date(res.dateDebut),
