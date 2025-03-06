@@ -41,6 +41,10 @@ reservationsApi.getUserReservations = () => {
 	return reservationsApi.get(`/user/${userId}`);
 }
 
+reservationsApi.getAllReservations = () => {
+	return reservationsApi.get(`/`);
+}
+
 reservationsApi.deleteReservation = (id) => {
 	return reservationsApi.delete(`/${id}`);
 }
@@ -50,8 +54,8 @@ reservationsApi.createReservation = (reservation) => {
 	return reservationsApi.post("/", { ...reservation, user });
 }
 
-reservationsApi.updateReservation = (id, reservation) => {
-	const user = getUserId();
+reservationsApi.updateReservation = (id, reservation, event) => {
+	const user = getUserId(event);
 	return reservationsApi.put(`/${id}`, { ...reservation, user });
 }
 	
