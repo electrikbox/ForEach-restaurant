@@ -17,7 +17,6 @@ const router = useRouter();
 
 const login = async () => {
 	errorMessage.value = ''; // Réinitialise le message d'erreur
-	console.log(email, "connecting...");
 	try {
 		const response = await authApi.login(email.value, password.value);
 

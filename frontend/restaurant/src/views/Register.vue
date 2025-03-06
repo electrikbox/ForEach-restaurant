@@ -16,17 +16,11 @@ const router = useRouter();
 const register = async () => {
 	errorMessage.value = ''; // Réinitialise le message d'erreur
 	try {
-		// await axios.post('http://localhost:8000/auth/register', {
-		// 	username: username.value,
-		// 	email: email.value,
-		// 	password: password.value
-		// });
-
 		await authApi.register(username.value, email.value, password.value);
 
 		router.push('/login');
 	} catch (error) {
-		errorMessage.value = 'Login failed. Please check your credentials.';
+		errorMessage.value = 'register failed.';
 		console.error(error);
 	}
 };
