@@ -6,13 +6,13 @@ class ReservationsController {
 
 
 
-    // create method
+    // create reservation
     // ========================================================================
 
     static createReservation = async (req, res) => {
         try {
-            const { user, dateDebut, dateFin } = req.body;
-            const response = await ReservationsService.createReservation(user, dateDebut, dateFin);
+            const { user, dateDebut, dateFin, nbPersonnes } = req.body;
+            const response = await ReservationsService.createReservation(user, dateDebut, dateFin, nbPersonnes);
             res.status(201).json(response);
             
         } catch (error) {
@@ -22,7 +22,7 @@ class ReservationsController {
     };
 
 
-    // login method
+    // get reservation
     // =================================================================
 
     static getReservation = async (req, res) => {
@@ -36,6 +36,22 @@ class ReservationsController {
             res.status(statusCode).json({ message: error.message });
         }
     };
+
+
+
+    // get all reservations
+    // =================================================================
+
+    static getAllReservations = async (req, res) => {
+        try {
+            const response = await ReservationsService.getAllReservations();
+            res.status(200).json(response);
+
+        } catch (error) {
+            const statusCode = error.statusCode || 400;
+            res.status(statusCode).json({ message: error.message });
+        }
+    }
 
 
 
@@ -62,11 +78,9 @@ class ReservationsController {
     static updateReservation = async (req, res) => {
         try {
             const { id } = req.params;
-            const { user, dateDebut, dateFin, validated, sentEmail } = req.body;
-            const response = await ReservationsService.updateReservation(id, user, dateDebut, dateFin, validated, sentEmail);
+            const { user, dateDebut, dateFin, validated, sentEmail, nbPersonnes } = req.body;
+            const response = await ReservationsService.updateReservation(id, user, dateDebut, dateFin, validated, sentEmail, nbPersonnes);
             res.status(200).json(response);
-
-            console.log('Reservation updated:', response);
 
         } catch (error) {
             const statusCode = error.statusCode || 400;
