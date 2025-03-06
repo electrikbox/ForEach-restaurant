@@ -21,7 +21,11 @@ const Reservations = new mongoose.Schema({
     sentEmail: {
         type: Boolean,
         default: false
-    }
+    },
+    nbPersonnes: {
+        type: Number,
+        required: true
+    },
 },
 {
     timestamps: true
