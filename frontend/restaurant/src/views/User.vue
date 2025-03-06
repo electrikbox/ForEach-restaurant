@@ -5,9 +5,11 @@ import { reservationsApi } from "@/api/requests";
 import { errorHandler } from "@/utils/errorHandler";
 import VueCal from "vue-cal";
 import "vue-cal/dist/vuecal.css";
+import Formulaire from "@/components/Formulaire.vue";
 
 const reservations = ref([]);
 
+const minDate = new Date();
 
 
 // Fetches the reservations from the API
@@ -18,16 +20,24 @@ const fetchReservations = async () => {
 		const response = await reservationsApi.getUserReservations();
 
 		reservations.value = response.data.map((res) => ({
-			title: "Le Gourmet Moderne",
+			title: `nombre de personnes: ${res.nbPersonnes}`,
 			start: new Date(res.dateDebut),
 			end: new Date(res.dateFin),
 			id: res._id,
-			class: "sport",
+			class: "default",
 		}));
 
 	} catch (error) {
+		// let errMsg;
+
+		// if (error.response && error.response.data && error.response.data.message)
+		// 	errMsg = error.response.data.message;
+		// else
+		// 	errMsg = error.message;
+
+		// console.error("Erreur lors de la récupération des rendez-vous:", errMsg);
+
 		errorHandler(error, "Erreur lors de la récupération des rendez-vous");
-  		await fetchReservations();
 	}
 };
 
@@ -48,42 +58,6 @@ const deleteEvent = async (event) => {
 
 
 
-// Creates an event in the API
-// ============================================================================
-
-const createEvent = async (event) => {
-	try {
-		await reservationsApi.createReservation({
-			dateDebut: event.start.toISOString(),
-			dateFin: event.end.toISOString(),
-		});
-		await fetchReservations();
-	} catch (error) {
-		errorHandler(error, "Erreur lors de la création du rendez-vous");
-  		await fetchReservations();
-	}
-};
-
-
-
-// Updates an event in the API
-// ============================================================================
-
-const updateEvent = async (event) => {
-	try {
-		await reservationsApi.updateReservation(event.event.id, {
-			dateDebut: event.event.start.toISOString(),
-			dateFin: event.event.end.toISOString(),
-		});
-		await fetchReservations();
-	} catch (error) {
-		errorHandler(error, "Erreur lors de la mise à jour du rendez-vous");
-  		await fetchReservations();
-	}
-};
-
-
-
 // Fetch the reservations when the component is mounted
 // ============================================================================
 
@@ -93,39 +67,36 @@ onMounted(fetchReservations);
 
 
 <template>
-<div class="flex items-center justify-center w-full">
+	<div class="flex items-start justify-center w-full gap-5">
 
-	<div class="container mt-5 bg-gray-700 p-5 rounded-lg shadow-lg">
-
-		<h2>Calendrier des rendez-vous</h2>
+		<div class="container mt-5 bg-gray-100 p-5 rounded-lg shadow-lg w-512">
+		<Formulaire @reservation-created="fetchReservations" />
 
 		<vue-cal class="vuecal--blue-theme"
 			locale="fr"
 			:events="reservations"
+			:min-date="minDate"
 			:disable-views="['years', 'year']"
 			:time="true"
 			:time-from="12 * 60"
 	  		:time-to="23 * 60"
 	  		:time-step="30"
-			:editable-events="{ title: false, drag: true, resize: true, delete: true, create: true }"
+			:editable-events="{ title: false, drag: false, resize: false, delete: true, create: false }"
 	  		:drag-to-create-threshold="0"	
 			:snap-to-time="30"
 			@event-delete="deleteEvent"
-			@event-drop="updateEvent"
-  			@event-duration-change="updateEvent"
-  			@event-drag-create="createEvent"
 		/>
-
 	</div>
 
 </div>
 </template>
 
 
+
 <style scoped>
-::v-deep .vuecal__event.sport {
-  background-color: rgba(24, 40, 53, 0.9);
-  border-radius: 5px;
-  color: #fff;
- }
+::v-deep .vuecal__event.default {
+  	background-color: rgba(50, 92, 126, 0.9);
+  	border-radius: 5px;
+  	color: #fff;
+}
 </style>
