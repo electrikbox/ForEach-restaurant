@@ -24,7 +24,7 @@ app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(createPinia())
 app.use(router)
 app.use(Toast, {
-    position: "top-center",
+    position: "bottom-center",
     timeout: 3000,
     closeOnClick: false,
     pauseOnHover: true,
