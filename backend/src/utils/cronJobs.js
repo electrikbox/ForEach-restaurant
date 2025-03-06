@@ -24,7 +24,7 @@ cron.schedule(schedule, async () => {
 			const subject = 'Rappel de reservation';
 			const htmlContent = `
 				<p>Bonjour ${reservation.user.username}</p>
-				<p>Votre prochaine reservation: ${reservation.dateDebut}: ${reservation.title}</p>`
+				<p>Votre prochaine reservation: ${reservation.dateDebut}</p>`
 			;
 			await sendEmail(reservation.user.email, subject, htmlContent);
 		};

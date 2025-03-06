@@ -33,7 +33,7 @@ const sendEmail = async (to, subject, htmlContent) => {
 		html: htmlContent,
 	});
 
-	console.debug(`email sent to ${email}`);
+	console.debug(`email sent to ${to}`);
 };
 
 module.exports = sendEmail;
