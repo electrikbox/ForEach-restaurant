@@ -24,14 +24,12 @@ class ReservationsService {
       
         // Calculer le nombre total de personnes déjà réservées sur cet intervalle
         const totalReserved = overlappingReservations.reduce(
-            (sum, reservation) => sum + (reservation.nbPersonnes || 0),
-            0
+            (sum, reservation) => sum + (reservation.nbPersonnes || 0), 0
         );
       
         // Si l'ajout du nouveau nbPersonnes dépasse la capacité maximale, rejeter la réservation
-        if (totalReserved + nbPersonnes > maxReservations) {
+        if (totalReserved + nbPersonnes > maxReservations)
             throw new AppError(400, "Il n'y a plus de place pour des réservations à cet horaire.");
-        }
       
         // Optionnel : Vérifier si l'utilisateur a déjà une réservation dans cet intervalle
         const existingReservation = await Reservations.findOne({
@@ -39,9 +37,10 @@ class ReservationsService {
             dateDebut: { $lte: newDateFin },
             dateFin: { $gte: newDateDebut }
         }).populate('user');
-        if (existingReservation) {
+
+        // Si une réservation existe déjà pour cet intervalle, rejeter la réservation
+        if (existingReservation)
             throw new AppError(400, 'Une réservation existe déjà pour cet intervalle de temps.');
-        }
       
         // Créer et sauvegarder la nouvelle réservation en incluant le nombre de personnes
         const newReservation = new Reservations({ user, dateDebut, dateFin, nbPersonnes });

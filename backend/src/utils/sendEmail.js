@@ -25,13 +25,10 @@ const transporter = nodemailer.createTransport({
 // Send an email
 // ============================================================================
 
-const sendEmail = async (to, subject, htmlContent) => {
-	await transporter.sendMail({
-		from: `"Le Gourmet Moderne" <${emailUser}>`,
-		to,
-		subject,
-		html: htmlContent,
-	});
+const sendEmail = async (to, subject, html) => {
+
+	const from = `"Le Gourmet Moderne" <${emailUser}>`;
+	await transporter.sendMail({ from, to, subject, html });
 
 	console.debug(`email sent to ${to}`);
 };

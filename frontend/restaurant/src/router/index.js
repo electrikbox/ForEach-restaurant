@@ -24,6 +24,8 @@ router.beforeEach((to, from, next) => {
 	// Si la route requiert une authentification
 	if (to.meta.requiresAuth) {
 	  	const storedUser = localStorage.getItem("user");
+
+		// Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
 	  	if (!storedUser) return next({ path: '/login' });
 	}
   
@@ -31,12 +33,14 @@ router.beforeEach((to, from, next) => {
 	if (to.meta.requireAdmin) {
 	  	const storedUser = localStorage.getItem("user");
 
-	  	if (!storedUser) {
-			return next({ path: '/login' });
+		// Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
+	  	if (!storedUser) return next({ path: '/login' });
 
-		} else {
+		// Sinon, vérifier si l'utilisateur est admin
+		else {
 			const user = JSON.parse(storedUser);
 
+			// Si l'utilisateur n'est pas admin, rediriger vers la page utilisateur
 			if (user.role !== 'admin') {
 		  		toast.error("Vous n'avez pas les droits pour accéder à cette page");
 		  		return next({ path: '/user' });

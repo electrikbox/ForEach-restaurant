@@ -44,7 +44,13 @@ class UsersService {
         if (!isPasswordValid) throw new AppError(400, 'Invalid credentials');
         
         // create token
-        const payload = { id: user._id, username: user.username, email: user.email, role: user.role };
+        const payload = {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role
+        };
+
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
         if (!token) throw new AppError(500,'Error creating token');
         

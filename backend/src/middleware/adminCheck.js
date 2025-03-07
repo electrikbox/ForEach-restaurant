@@ -6,15 +6,10 @@ const adminCheck = async (req, res, next) => {
 
     // Check if token is present in headers or cookies
     let token = req.headers.authorization;
-
-    if (!token && req.cookies && req.cookies.token)
-        token = req.cookies.token;
+    if (!token && req.cookies && req.cookies.token) token = req.cookies.token;
 
     // If token is not present, return error
-    if (!token) {
-        res.status(401).json({ error: 'Token not found' });
-        return;
-    }
+    if (!token) return res.status(401).json({ error: 'Token not found' });
   
     try {
         // Verify token
@@ -22,10 +17,8 @@ const adminCheck = async (req, res, next) => {
         req.user = decoded;
 
         // Check if user is admin
-        if (req.user.role !== 'admin') {
-            res.status(403).json('Only admin can access this route');
-            return;
-        }
+        if (req.user.role !== 'admin')
+            return res.status(403).json('Only admin can access this route');
 
         next();
     } catch (err) {

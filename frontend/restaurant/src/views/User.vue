@@ -4,8 +4,8 @@ import { ref, onMounted } from "vue";
 import { reservationsApi } from "@/api/requests";
 import { errorHandler } from "@/utils/errorHandler";
 import VueCal from "vue-cal";
-import "vue-cal/dist/vuecal.css";
 import Formulaire from "@/components/Formulaire.vue";
+import "vue-cal/dist/vuecal.css";
 
 const reservations = ref([]);
 

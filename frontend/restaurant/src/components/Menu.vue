@@ -4,9 +4,9 @@
 import { ref } from 'vue';
 
 const isHovered = ref(false);
-let isAdmin;
-
 const userString = localStorage.getItem("user");
+
+let isAdmin;
 
 if (userString) {
 	const user = JSON.parse(userString);
