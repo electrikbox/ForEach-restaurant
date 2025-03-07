@@ -31,6 +31,11 @@ cron.schedule(schedule, async () => {
 			;
 			await sendEmail(reservation.user.email, subject, htmlContent);
 		};
+
+		await Reservations.updateMany(
+			{ _id: { $in: reservations.map(reservation => reservation._id) } },
+			{ sentEmail: true }
+		);
 	}
 	catch (error) {
 		console.log('Error:', error);
